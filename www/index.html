@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#c20d5c"><title>মানব মুক্তি সংস্থা - হিসাব এ্যাপ</title>
+<style>
+:root{--bg:#fff;--card:#fff5fa;--cb:#f6d3e3;--in:#fff;--ib:#e8c4d6;--ac:#e2136e;--g1:#c20d5c;--g2:#f2569a;--tx:#222;--mu:#999}
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Bengali","Nirmala UI",Arial,sans-serif;background:var(--bg);color:var(--tx);padding:0 0 40px}
+.w{max-width:560px;margin:0 auto;padding:0 14px}
+header{text-align:center;padding:22px 14px 26px;margin:0 -14px 8px;border-radius:0 0 28px 28px;background:linear-gradient(160deg,var(--g1),var(--ac) 55%,var(--g2));color:#fff;box-shadow:0 4px 14px #0003}
+header h1{font-size:25px;margin:0}header p{margin:2px 0 0;font-size:25px;font-weight:bold}
+.opt{position:relative;text-align:center;font-size:19px;font-weight:bold;color:var(--ac);border-bottom:1px solid var(--cb);padding:2px 0 8px;margin:0 0 6px}
+#mb{position:absolute;left:0;top:-3px;background:none;border:0;color:var(--ac);padding:2px 10px;cursor:pointer;line-height:0}
+#menu{display:none;position:absolute;left:4px;top:40px;z-index:9;background:#fff;border:1px solid var(--cb);border-radius:12px;overflow:hidden;text-align:left;box-shadow:0 6px 20px #0003}
+#menu button{display:block;width:100%;background:none;border:0;border-bottom:1px solid #f3e1ea;color:var(--tx);padding:13px 20px;font:inherit;font-weight:normal;text-align:left;white-space:nowrap}
+.ub{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:14px;padding:2px 4px 6px}
+.ub button{border:1px solid var(--ac);background:#fff;border-radius:50%;width:36px;height:36px;font-size:16px;padding:0}
+.cp{display:none;background:var(--card);border:1px solid var(--cb);border-radius:14px;padding:10px;margin-bottom:8px}.sw{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px}.sw button{width:40px;height:40px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px #bbb;padding:0}.sw button.on{box-shadow:0 0 0 3px #333}
+.ue{display:none;background:var(--card);border:1px solid var(--cb);border-radius:14px;padding:12px;margin-bottom:12px}
+.tabs{display:flex;border:1px solid var(--ac);border-radius:12px;overflow:hidden;margin:4px 0 8px;background:#fff}
+.tabs button{flex:1;padding:11px 6px;border:0;background:none;color:var(--ac);font:inherit;font-size:16px}.tabs button.on{background:var(--ac);color:#fff}
+.sh{font-size:20px;color:var(--ac);margin:10px 0 8px}
+.card{background:var(--card);border:1px solid var(--cb);border-radius:16px;padding:12px;margin-bottom:8px}
+label.l{display:block;font-size:16px;margin:8px 0 4px}.card>label.l:first-child{margin-top:2px}
+input,select{width:100%;padding:10px 12px;border:1px solid var(--ib);border-radius:12px;font:inherit;font-size:17px;background:var(--in);color:var(--tx)}
+input::placeholder{color:var(--mu)}input.bad{border-color:#e53935;background:#fff0f0}
+.df{display:flex;gap:8px}.df .dt{flex:1;min-width:0}
+.cal{position:relative;flex:0 0 48px;border:1px solid var(--ac);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--ac);background:#fff}
+.cal input{position:absolute;inset:0;opacity:0;width:100%;height:100%;padding:0}
+.row{display:flex;gap:6px;margin-bottom:5px;align-items:stretch}.row .df{flex:1.5;min-width:0}.row .df .dt{padding:10px 8px}.row .pa{flex:1;min-width:0;padding:10px 8px}
+.row .x{flex:0 0 42px;border:1px solid #e53935;background:#fff;border-radius:12px;color:#e53935;font-size:22px}
+.btn{padding:10px 16px;border:1px solid var(--ac);border-radius:12px;background:#fff;color:var(--ac);font:inherit;font-size:16px;margin-top:4px}
+.res{font-size:16px}.res.ph{color:var(--mu)}.res.err{color:#d32f2f}
+.rw{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:4px 4px;border-bottom:1px solid var(--cb)}.rw b{font-size:16px;white-space:nowrap}
+.tot{display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(135deg,var(--ac),var(--g2));color:#fff;border-radius:14px;padding:10px 14px;margin-top:8px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:16px;min-width:430px}th{color:var(--ac);text-align:left;padding:5px 8px;border-bottom:1px solid var(--cb)}td{padding:5px 8px;border-bottom:1px solid var(--cb);white-space:nowrap}td:nth-child(n+2),th:nth-child(n+2){text-align:right}
+tr.tt td{border-top:3px solid var(--ac);color:var(--ac);font-weight:bold}small{color:var(--mu)}
+input:focus,select:focus{outline:2px solid var(--ac);outline-offset:1px}
+.big{font-size:20px;font-weight:bold}.hide{display:none}
+@media print{body{background:#fff;color:#000;padding:0}.noprint,#mb,.ub button,.tabs,.btn{display:none!important}
+header{background:#fff!important;color:#000;box-shadow:none;border:2px solid #000;border-radius:12px;margin:0 0 10px;padding:12px}
+.opt,.sh,.res,.rw,td,th,.rw b{color:#000!important;border-color:#999!important}.card{background:#fff;border-color:#999}
+.tot{background:#eee!important;color:#000!important}tr.tt td{color:#000!important;border-top-color:#000}}
+</style></head><body><div class="w">
+<header><h1>মানব মুক্তি সংস্থা</h1><p>হিসাব এ্যাপ</p>
+</header>
+<div class="ub"><span id="ubt"></span><button id="ped" title="সম্পাদনা">✏️</button></div>
+<div class="opt"><button id="mb" aria-label="মেনু"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><span id="opt">সুফলন ক্যালকুলেশন</span>
+<div id="menu"><button data-p="sf">1. সুফলন ক্যালকুলেশন</button><button data-p="rb">2. রিবেট ক্যালকুলেশন</button><button id="clr">3. রঙ পরিবর্তন</button></div></div>
+<div class="cp" id="cp"><div class="sw" id="sw"></div><button class="btn" id="cr">ডিফল্ট রঙ (গোলাপি)</button></div>
+<div class="ue" id="ue"><label class="l">ব্যবহারকারীর নাম</label><input id="usr"><label class="l">শাখার নাম</label><input id="brn">
+<button class="btn" onclick="saveU()">সংরক্ষণ করুন</button></div>
+
+<section id="sf">
+<div class="tabs noprint"><button id="t1" class="on">এককালীন পরিশোধ</button><button id="t2">একাধিকবার পরিশোধ</button></div>
+<h2 class="sh noprint">ইনপুট ডাটা</h2>
+<div class="card noprint" id="lump">
+<label class="l">ঋণ বিতরণের তারিখ</label><div id="l_d0"></div>
+<label class="l">ঋণের পরিমাণ (টাকা)</label><input id="l_a" type="number" inputmode="decimal">
+<label class="l">সার্ভিস চার্জের হার (%)</label><input id="l_r" type="number" inputmode="decimal" value="24">
+<label class="l">ঋণ পরিশোধের তারিখ</label><div id="l_d1"></div></div>
+<div class="card noprint hide" id="multi">
+<label class="l">ঋণ বিতরণের তারিখ</label><div id="m_d0"></div>
+<label class="l">ঋণের পরিমাণ (টাকা)</label><input id="m_a" type="number" inputmode="decimal">
+<label class="l">সার্ভিস চার্জের হার (%)</label><input id="m_r" type="number" inputmode="decimal" value="24">
+<label class="l">আংশিক পরিশোধের এন্ট্রি</label><div id="pays"></div>
+<button class="btn" onclick="addPay()">+ পরিশোধ যোগ করুন</button>
+<label class="l">চূড়ান্ত পরিশোধের তারিখ</label><div id="m_fin"></div></div>
+<h2 class="sh">ফলাফল</h2><div class="card res" id="sf_r"></div>
+<div class="noprint" style="display:flex;gap:10px"><div class="noprint" style="display:flex;gap:10px"><button class="btn" onclick="doPrint()">প্রিন্ট করুন</button><button class="btn" onclick="shareR('#rb_r')">শেয়ার করুন</button></div><button class="btn" onclick="shareR('#sf_r')">শেয়ার করুন</button></div>
+</section>
+
+<section id="rb" class="hide">
+<h2 class="sh noprint">ঋণের খাত</h2>
+<div class="card noprint"><select id="sec"></select></div>
+<div class="tabs noprint"><button id="r1" class="on">সাপ্তাহিক কিস্তি</button><button id="r2">মাসিক কিস্তি</button></div>
+<h2 class="sh noprint">ইনপুট ডাটা</h2>
+<div class="card noprint" id="wk">
+<label class="l">ঋণের পরিমাণ (টাকা)</label><input id="w_a" type="number" inputmode="decimal">
+<label class="l">কিস্তির সংখ্যা (সপ্তাহ নম্বর)</label><input id="w_n" type="number" inputmode="numeric"></div>
+<div class="card noprint hide" id="mo">
+<label class="l">ঋণের পরিমাণ (টাকা)</label><input id="o_a" type="number" inputmode="decimal">
+<label class="l">ঋণ বিতরণের তারিখ</label><div id="o_d0"></div>
+<label class="l">ঋণ পরিশোধের তারিখ</label><div id="o_d1"></div></div>
+<h2 class="sh">ফলাফল</h2><div class="card res" id="rb_r"></div>
+<button class="btn" onclick="doPrint()">প্রিন্ট করুন</button>
+</section></div>
+<script>
+const $=s=>document.querySelector(s),D=864e5;
+const f=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+function pd(s){const m=(s||'').trim().match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2}|\d{4})$/);if(!m)return null;let d=+m[1],o=+m[2],y=+m[3];if(y<100)y+=2000;const t=Date.UTC(y,o-1,d),x=new Date(t);return x.getUTCDate()===d&&x.getUTCMonth()===o-1?t:null}
+const p2=n=>String(n).padStart(2,'0');
+const fd=t=>{const x=new Date(t);return p2(x.getUTCDate())+'/'+p2(x.getUTCMonth()+1)+'/'+x.getUTCFullYear()};
+const iso=t=>new Date(t).toISOString().slice(0,10);
+const now=()=>{const n=new Date();return Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())};
+const ICON='<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
+const dfield=v=>`<div class="df"><input class="dt" inputmode="numeric" placeholder="দিন/মাস/বছর" value="${v?fd(v):''}"><label class="cal">${ICON}<input type="date" class="pk" value="${v?iso(v):''}"></label></div>`;
+document.addEventListener('change',e=>{if(e.target.classList.contains('pk')){const t=e.target.value?Date.parse(e.target.value):null,d=e.target.closest('.df').querySelector('.dt');d.value=t?fd(t):'';d.classList.remove('bad')}});
+document.addEventListener('focusout',e=>{const d=e.target;if(!d.classList||!d.classList.contains('dt'))return;const t=pd(d.value),k=d.closest('.df').querySelector('.pk');if(t!==null){d.value=fd(t);k.value=iso(t);d.classList.remove('bad')}else{k.value='';d.classList.toggle('bad',!!d.value.trim())}});
+const gd=el=>pd(el.querySelector('.dt').value);
+// মেনু
+$('#mb').onclick=e=>{e.stopPropagation();$('#menu').style.display=$('#menu').style.display=='block'?'none':'block'};
+document.addEventListener('click',()=>$('#menu').style.display='none');
+document.querySelectorAll('#menu button[data-p]').forEach(b=>b.onclick=()=>{const s=b.dataset.p;$('#sf').classList.toggle('hide',s!='sf');$('#rb').classList.toggle('hide',s!='rb');$('#opt').textContent=s=='sf'?'সুফলন ক্যালকুলেশন':'রিবেট ক্যালকুলেশন';upd()});
+let mode1=1,mode2=1;
+function tabs(a,b,x,y,set){$(a).onclick=()=>{$(a).classList.add('on');$(b).classList.remove('on');$(x).classList.remove('hide');$(y).classList.add('hide');set(1);upd()};$(b).onclick=()=>{$(b).classList.add('on');$(a).classList.remove('on');$(y).classList.remove('hide');$(x).classList.add('hide');set(2);upd()}}
+tabs('#t1','#t2','#lump','#multi',v=>mode1=v);tabs('#r1','#r2','#wk','#mo',v=>mode2=v);
+// রঙ পরিবর্তন
+function mix(h,t,w){const n=parseInt(h.slice(1),16);return '#'+[n>>16,(n>>8)&255,n&255].map(v=>Math.round(v+(w-v)*t).toString(16).padStart(2,'0')).join('')}
+const CL=[['গোলাপি','#e2136e'],['লাল','#d32f2f'],['কমলা','#e8710a'],['সবুজ','#1a8f4c'],['নীল','#1e66d0'],['গাঢ় নীল','#16407a'],['বেগুনি','#7b3fc4'],['খয়েরি','#8d4b2f']];
+function theme(h){const r=document.documentElement.style;if(!h){['--ac','--g1','--g2','--card','--cb','--ib'].forEach(k=>r.removeProperty(k));try{localStorage.removeItem('clr')}catch(e){}h='#e2136e'}
+ else{r.setProperty('--ac',h);r.setProperty('--g1',mix(h,.18,0));r.setProperty('--g2',mix(h,.35,255));r.setProperty('--card',mix(h,.95,255));r.setProperty('--cb',mix(h,.8,255));r.setProperty('--ib',mix(h,.72,255));try{localStorage.setItem('clr',h)}catch(e){}}
+ document.querySelectorAll('#sw button').forEach(b=>b.classList.toggle('on',b.dataset.c==h))}
+$('#sw').innerHTML=CL.map(c=>`<button data-c="${c[1]}" title="${c[0]}" style="background:${c[1]}"></button>`).join('');
+$('#sw').onclick=e=>{if(e.target.dataset.c)theme(e.target.dataset.c)};
+$('#cr').onclick=()=>theme(null);
+$('#clr').onclick=()=>{$('#cp').style.display=$('#cp').style.display=='block'?'none':'block'};
+{let c=null;try{c=localStorage.getItem('clr')}catch(e){}theme(c)}
+// ব্যবহারকারী ও শাখা
+let U={u:'',b:''};try{U=JSON.parse(localStorage.getItem('ub'))||U}catch(e){}
+function showU(){$('#ubt').innerHTML='ব্যবহারকারী: <b>'+(U.u||'—')+'</b> &nbsp;|&nbsp; শাখা: <b>'+(U.b||'—')+'</b>'}
+$('#ped').onclick=()=>{$('#usr').value=U.u;$('#brn').value=U.b;$('#ue').style.display=$('#ue').style.display=='block'?'none':'block'};
+function saveU(){U={u:$('#usr').value.trim(),b:$('#brn').value.trim()};try{localStorage.setItem('ub',JSON.stringify(U))}catch(e){}showU();$('#ue').style.display='none'}
+showU();
+// ফলাফল দেখানো
+const PH1='তারিখ, ঋণের পরিমাণ ও সার্ভিস চার্জের হার দিলে ফলাফল এখানে দেখাবে।';
+function show(id,h,k){const e=$(id);e.className='card res'+(k?' '+k:'');e.innerHTML=h}
+// ===== সুফলন =====
+['#l_d0','#m_d0'].forEach(i=>$(i).innerHTML=dfield(null));
+$('#l_d1').innerHTML=dfield(now());$('#m_fin').innerHTML=dfield(now());
+function addPay(){const r=document.createElement('div');r.className='row';r.innerHTML=dfield(null)+'<input type="number" inputmode="decimal" placeholder="পরিমাণ (টাকা)" class="pa"><button class="x" onclick="this.parentNode.remove();upd()">✕</button>';$('#pays').appendChild(r)}
+addPay();
+const rw=(l,v)=>`<div class="rw"><span>${l}</span><b>${v}</b></div>`,tot=(l,v)=>`<div class="tot"><span>${l}</span><span class="big">${v}</span></div>`;
+function calcL(){const a=+$('#l_a').value,r=+$('#l_r').value,d0=gd($('#l_d0')),d1=gd($('#l_d1'));
+ if(!a||!r||d0===null||d1===null)return show('#sf_r',PH1,'ph');
+ if(d1<d0)return show('#sf_r','পরিশোধের তারিখ বিতরণ তারিখের আগে হতে পারে না','err');
+ const days=(d1-d0)/D,sc=a*r/100*days/365;
+ show('#sf_r',rw('ঋণ ব্যবহারের সময় (দিন)',days+' দিন')+rw('সার্ভিস চার্জের হার',r+'%')+rw('সার্ভিস চার্জের পরিমাণ',f(sc)+' টাকা')+tot('মোট পরিমাণ (ঋণ + সার্ভিস চার্জ)',f(a+sc)+' টাকা'))}
+function calcM(){const L=+$('#m_a').value,R=+$('#m_r').value,d0=gd($('#m_d0')),fin=gd($('#m_fin'));
+ if(!L||!R||d0===null||fin===null)return show('#sf_r',PH1,'ph');
+ let P=[];for(const r of document.querySelectorAll('#pays .row')){const d=gd(r),a=+r.querySelector('.pa').value;if(d===null&&!a)continue;if(d===null||!a)return show('#sf_r',PH1,'ph');P.push({d,a})}
+ P.sort((x,y)=>x.d-y.d);let bal=L,last=d0,tot_=0,td=0,h='';const r=R/100;
+ if((P.length&&P[0].d<d0)||fin<(P.length?P[P.length-1].d:d0))return show('#sf_r','তারিখের ক্রম ঠিক নেই (বিতরণ ≤ আংশিক পরিশোধ ≤ চূড়ান্ত তারিখ)','err');
+ const row=(a,b,days,bl)=>{const sc=bl*r*days/365;tot_+=sc;td+=days;h+=`<tr><td>${fd(a)} – ${fd(b)}${b===fin&&last===b?'':''}</td><td>${days}</td><td>${f(bl)}</td><td>${f(sc)}</td></tr>`};
+ for(const p of P){if(p.a>bal)return show('#sf_r','পরিশোধের পরিমাণ অবশিষ্ট ঋণের চেয়ে বেশি','err');row(last,p.d,(p.d-last)/D,bal);bal-=p.a;last=p.d}
+ const fsc=bal*r*(fin-last)/D/365;h+=`<tr><td>${fd(last)} – ${fd(fin)} <small>(চূড়ান্ত)</small></td><td>${(fin-last)/D}</td><td>${f(bal)}</td><td>${f(fsc)}</td></tr>`;tot_+=fsc;td+=(fin-last)/D;
+ h+=`<tr class="tt"><td>মোট</td><td>${td}</td><td></td><td>${f(tot_)}</td></tr>`;
+ show('#sf_r',`<div class="tw"><table><tr><th>সময়কাল</th><th>ব্যবহৃত দিন</th><th>ঋণ (টাকা)</th><th>সার্ভিস চার্জ (টাকা)</th></tr>${h}</table></div>`+rw('চূড়ান্ত পরিশোধের তারিখ',fd(fin))+rw('মোট ঋণ ব্যবহারের সময় (দিন)',td+' দিন')+rw('সার্ভিস চার্জের হার',R+'%')+rw('মোট সার্ভিস চার্জ (আংশিক চার্জের যোগফল)',f(tot_)+' টাকা')+rw('মোট ঋণ পরিশোধ',f(L)+' টাকা')+tot('মোট পরিশোধের পরিমাণ (ঋণ + সার্ভিস চার্জ)',f(L+tot_)+' টাকা'))}
+// ===== রিবেট (প্রতি হাজারে) =====
+const W={24:[117,112,107,102,97,92,88,83,79,75,71,66,63,59,55,52,48,45,42,38,35,33,30,27,25,22,20,18,16,14,12,11,9,8,6,5,4,3,2,2,1,1],
+20:[91,87,83,79,75,72,68,64,61,58,54,51,48,45,42,39,37,34,31,29,27,24,22,20,18,17,15,13,12,10,9,8,6,5,4,3,3,2,1,1,1,0],
+18:[88,84,80,76,72,68,65,62,58,55,52,49,46,43,40,37,35,32,30,28,25,23,21,19,17,16,14,12,11,10,8,7,6,5,4,3,2,2,1,1,1,0]};
+const M={24:[107,88,71,56,42,31,21,13,7,3,0,0],20:[83,68,55,42,32,23,15,9,5,2,0,0],18:[79,65,52,40,30,21,14,8,4,1,0,0]};
+const SEC=[['জাগরণ',24],['অগ্রসর',24],['এমডিপি',24],['বুনিয়াদ',20],['এমডিপি-এফ',18],['এমএফসিই',18],['রেইজ',18],['সোপান',18]];
+$('#sec').innerHTML=SEC.map((s,i)=>`<option value="${i}">${s[0]} (${s[1]}%)</option>`).join('');
+const rt=()=>SEC[$('#sec').value][1],sn=()=>SEC[$('#sec').value][0];
+function out(per,a,x){show('#rb_r',rw('ঋণের খাত',sn()+' ('+rt()+'%)')+x+rw('ঋণের পরিমাণ',f(a)+' টাকা')+rw('প্রতি হাজারে রিবেট',per+' টাকা')+tot('মোট রিবেট',f(a/1000*per)+' টাকা'))}
+function calcW(){const a=+$('#w_a').value,n=Math.floor(+$('#w_n').value);
+ if(!a||n<1)return show('#rb_r','ঋণের পরিমাণ ও কিস্তির সংখ্যা দিলে ফলাফল এখানে দেখাবে।','ph');
+ out(W[rt()][n-1]||0,a,rw('সপ্তাহ নম্বর',n))}
+function addM(t,m){const x=new Date(t),y=x.getUTCFullYear(),o=x.getUTCMonth()+m,l=new Date(Date.UTC(y,o+1,0)).getUTCDate();return Date.UTC(y,o,Math.min(x.getUTCDate(),l))}
+$('#o_d0').innerHTML=dfield(null);$('#o_d1').innerHTML=dfield(now());
+function calcO(){const a=+$('#o_a').value,d0=gd($('#o_d0')),d1=gd($('#o_d1'));
+ if(!a||d0===null||d1===null)return show('#rb_r','ঋণের পরিমাণ ও তারিখ দিলে ফলাফল এখানে দেখাবে।','ph');
+ if(d1<d0)return show('#rb_r','পরিশোধের তারিখ বিতরণ তারিখের আগে হতে পারে না','err');
+ const A=new Date(d0),B=new Date(d1);let m=(B.getUTCFullYear()-A.getUTCFullYear())*12+B.getUTCMonth()-A.getUTCMonth(),an=addM(d0,m);
+ if(an>d1){m--;an=addM(d0,m)}const d=(d1-an)/D,c=m+(d>0?1:0);
+ out(M[rt()][c-1]||0,a,rw('বিতরণের তারিখ',fd(d0))+rw('পরিশোধের তারিখ',fd(d1))+rw('ঋণ ব্যবহারের সময়',m+' মাস '+d+' দিন')+rw('রিবেটের জন্য ধরা মাস',c+' মাস'+(c>12?' (১২ মাসের বেশি — রিবেট নেই)':'')))}
+// প্রিন্ট (অ্যাপে অ্যান্ড্রয়েডের নিজস্ব প্রিন্ট, ব্রাউজারে সাধারণ প্রিন্ট)
+async function doPrint(){try{const P=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.HisabPrint;if(P){await P.print();return}}catch(e){}window.print()}
+// ফলাফল শেয়ার (টেক্সট)
+async function shareR(id){
+ const L=['মানব মুক্তি সংস্থা - হিসাব এ্যাপ',$('#ubt').innerText,$('#opt').textContent,''];
+ document.querySelectorAll(id+' .rw,'+id+' .tot,'+id+' tr').forEach(e=>{
+  if(e.tagName=='TR')L.push([...e.children].map(c=>c.innerText.trim()).filter(Boolean).join(' | '));
+  else{const k=e.children;L.push(k[0].innerText.trim()+': '+k[1].innerText.trim())}});
+ const t=L.join('\n');
+ try{const S=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.Share;
+  if(S)await S.share({title:'হিসাব',text:t});
+  else if(navigator.share)await navigator.share({text:t});
+  else{await navigator.clipboard.writeText(t);alert('ফলাফল কপি হয়েছে')}}catch(e){}}
+// লাইভ হিসাব
+function upd(){if(!$('#sf').classList.contains('hide'))(mode1==1?calcL:calcM)();else(mode2==1?calcW:calcO)()}
+['input','change','focusout'].forEach(ev=>document.addEventListener(ev,e=>{if(e.target.closest&&e.target.closest('.ue'))return;setTimeout(upd,0)}));
+upd();
+</script></body></html>
